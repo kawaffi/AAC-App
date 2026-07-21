@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Comunica">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <title>Comunica</title>
+</head>
+
+<body>
+  <div id="header-container">
+    <div id="core-left" class="core-section"></div>
+
+    <div id="sentence-bar">
+      <div id="sentence-words">
+        <span id="placeholder">Tocca un simbolo per iniziare</span>
+      </div>
+      <div id="sentence-actions">
+        <button id="clear-btn" aria-label="Cancella">✕</button>
+        <button id="speak-btn" aria-label="Pronuncia">🔊</button>
+      </div>
+    </div>
+
+    <div id="core-right" class="core-section"></div>
+  </div>
+
+  <div id="category-tabs"></div>
+
+  <main id="grid"></main>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js');
+      });
+    }
+  </script>
+</body>
+
+</html>

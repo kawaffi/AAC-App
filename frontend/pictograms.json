@@ -1,0 +1,122 @@
+[
+  {
+    "label": "Sì",
+    "search": "sí",
+    "category": "Sentimenti",
+    "core": true,
+    "id": 5584,
+    "image": "assets/pictograms/5584.png"
+  },
+  {
+    "label": "No",
+    "search": "no",
+    "category": "Sentimenti",
+    "core": true,
+    "id": 5526,
+    "image": "assets/pictograms/5526.png"
+  },
+  {
+    "label": "Aiuto",
+    "search": "ayuda",
+    "category": "Bisogni",
+    "core": true,
+    "id": 12252,
+    "image": "assets/pictograms/12252.png"
+  },
+  {
+    "label": "Dolore",
+    "search": "dolor",
+    "category": "Bisogni",
+    "core": true,
+    "id": 2367,
+    "image": "assets/pictograms/2367.png"
+  },
+  {
+    "label": "Bagno",
+    "search": "baño",
+    "category": "Bisogni",
+    "core": false,
+    "id": 6929,
+    "image": "assets/pictograms/6929.png"
+  },
+  {
+    "label": "Sete",
+    "search": "sed",
+    "category": "Bisogni",
+    "core": false,
+    "id": 2730,
+    "image": "assets/pictograms/2730.png"
+  },
+  {
+    "label": "Fame",
+    "search": "hambre",
+    "category": "Bisogni",
+    "core": false,
+    "id": 35559,
+    "image": "assets/pictograms/35559.png"
+  },
+  {
+    "label": "Stanco",
+    "search": "cansado",
+    "category": "Sentimenti",
+    "core": false,
+    "id": 35537,
+    "image": "assets/pictograms/35537.png"
+  },
+  {
+    "label": "Bene",
+    "search": "bien",
+    "category": "Sentimenti",
+    "core": false,
+    "id": 14552,
+    "image": "assets/pictograms/14552.png"
+  },
+  {
+    "label": "Male",
+    "search": "mal",
+    "category": "Sentimenti",
+    "core": false,
+    "id": 10263,
+    "image": "assets/pictograms/10263.png"
+  },
+  {
+    "label": "Aspetta",
+    "search": "esperar",
+    "category": "Azioni",
+    "core": false,
+    "id": 36914,
+    "image": "assets/pictograms/36914.png"
+  },
+  {
+    "label": "Vieni",
+    "search": "venir",
+    "category": "Azioni",
+    "core": false,
+    "id": 5442,
+    "image": "assets/pictograms/5442.png"
+  },
+  {
+    "label": "Ripeti",
+    "search": "repetir",
+    "category": "Azioni",
+    "core": false,
+    "id": 11752,
+    "image": "assets/pictograms/11752.png"
+  },
+  {
+    "label": "Io",
+    "search": "yo",
+    "category": "Persone",
+    "core": false,
+    "id": 29947,
+    "image": "assets/pictograms/29947.png"
+  },
+  {
+    "label": "Tu",
+    "search": "tú",
+    "category": "Persone",
+    "core": false,
+    "id": 6625,
+    "image": "assets/pictograms/6625.png"
+  }
+]
