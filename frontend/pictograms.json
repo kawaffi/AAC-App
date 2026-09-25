@@ -80,6 +80,38 @@
     "image": "assets/pictograms/10263.png"
   },
   {
+    "label": "Arrabbiato",
+    "search": "enfadado",
+    "category": "Sentimenti",
+    "core": false,
+    "id": 35539,
+    "image": "assets/pictograms/35539.png"
+  },
+  {
+    "label": "Triste",
+    "search": "triste",
+    "category": "Sentimenti",
+    "core": false,
+    "id": 35545,
+    "image": "assets/pictograms/35545.png"
+  },
+  {
+    "label": "Felice",
+    "search": "feliz",
+    "category": "Sentimenti",
+    "core": false,
+    "id": 9907,
+    "image": "assets/pictograms/9907.png"
+  },
+  {
+    "label": "Annoiato",
+    "search": "aburrido",
+    "category": "Sentimenti",
+    "core": false,
+    "id": 35531,
+    "image": "assets/pictograms/35531.png"
+  },
+  {
     "label": "Aspetta",
     "search": "esperar",
     "category": "Azioni",
