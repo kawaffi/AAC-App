@@ -29,11 +29,62 @@
     </div>
 
     <div id="core-right" class="core-section"></div>
+
+    <div id="custom-actions">
+      <button id="add-custom-btn" class="action-btn" aria-label="Aggiungi personalizzato" title="Aggiungi pittogramma">➕</button>
+      <button id="manage-custom-btn" class="action-btn" aria-label="Gestisci personalizzati" title="Gestisci pittogrammi">⚙️</button>
+    </div>
   </div>
 
   <div id="category-tabs"></div>
 
   <main id="grid"></main>
+
+  <div id="custom-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Aggiungi Pittogramma Personalizzato</h2>
+        <button id="close-modal" class="close-btn">✕</button>
+      </div>
+      <form id="custom-form">
+        <div class="form-group">
+          <label for="custom-label">Nome / Testo</label>
+          <input type="text" id="custom-label" required placeholder="Es: Mamma, Papà, Maria">
+        </div>
+        <div class="form-group">
+          <label for="custom-category">Categoria</label>
+          <select id="custom-category" required>
+            <option value="Persone">Persone</option>
+            <option value="Sentimenti">Sentimenti</option>
+            <option value="Bisogni">Bisogni</option>
+            <option value="Azioni">Azioni</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="custom-image">URL Immagine (opzionale)</label>
+          <input type="url" id="custom-image" placeholder="https://esempio.com/immagine.png">
+          <small>Lascia vuoto per usare solo testo</small>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="cancel-custom" class="btn-secondary">Annulla</button>
+          <button type="submit" class="btn-primary">Aggiungi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="manage-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Gestisci Pittogrammi Personalizzati</h2>
+        <button id="close-manage-modal" class="close-btn">✕</button>
+      </div>
+      <div id="custom-list"></div>
+      <div class="form-actions">
+        <button type="button" id="close-manage-btn" class="btn-secondary">Chiudi</button>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
   <script>
