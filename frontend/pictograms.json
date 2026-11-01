@@ -100,8 +100,8 @@
     "search": "feliz",
     "category": "Sentimenti",
     "core": false,
-    "id": 9907,
-    "image": "assets/pictograms/9907.png"
+    "id": 35547,
+    "image": "assets/pictograms/35547.png"
   },
   {
     "label": "Annoiato",
@@ -124,24 +124,24 @@
     "search": "venir",
     "category": "Azioni",
     "core": false,
-    "id": 5442,
-    "image": "assets/pictograms/5442.png"
+    "id": 32669,
+    "image": "assets/pictograms/32669.png"
   },
   {
     "label": "Ripeti",
     "search": "repetir",
     "category": "Azioni",
     "core": false,
-    "id": 11752,
-    "image": "assets/pictograms/11752.png"
+    "id": 2628,
+    "image": "assets/pictograms/2628.png"
   },
   {
     "label": "Io",
     "search": "yo",
     "category": "Persone",
     "core": false,
-    "id": 29947,
-    "image": "assets/pictograms/29947.png"
+    "id": 6632,
+    "image": "assets/pictograms/6632.png"
   },
   {
     "label": "Tu",

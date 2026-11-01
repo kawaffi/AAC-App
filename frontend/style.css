@@ -177,9 +177,16 @@ body {
   flex: 1;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 12px;
   padding: 14px;
+}
+
+@media (max-height: 800px) {
+  #grid {
+    gap: 6px;
+    padding: 10px;
+  }
 }
 
 .pictogram-btn {
@@ -192,7 +199,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  height: 180px;
+  height: 200px;
   cursor: pointer;
   font-size: 24px;
   font-weight: bold;
