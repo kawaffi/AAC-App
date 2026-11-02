@@ -13,6 +13,10 @@ const CATEGORY_ICONS = {
 
 const CUSTOM_STORAGE_KEY = "aac-custom-pictograms";
 
+const esc = s => String(s).replace(/[&<>"']/g, c => (
+  { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+));
+
 function getCustomPictograms() {
   try {
     const stored = localStorage.getItem(CUSTOM_STORAGE_KEY);
@@ -88,7 +92,7 @@ function renderTabs() {
     const btn = document.createElement("button");
     btn.className = "tab" + (cat === currentCategory ? " active" : "");
     const icon = CATEGORY_ICONS[cat] || "📂";
-    btn.innerHTML = `<span class="tab-icon">${icon}</span><span class="tab-label">${cat}</span>`;
+    btn.innerHTML = `<span class="tab-icon">${icon}</span><span class="tab-label">${esc(cat)}</span>`;
     btn.onclick = () => { currentCategory = cat; renderTabs(); renderGrid(); };
     tabsEl.appendChild(btn);
   });
@@ -121,9 +125,9 @@ function makeButton(p, extraClass = "") {
   const btn = document.createElement("button");
   btn.className = "pictogram-btn " + extraClass;
   const img = p.image
-    ? `<img src="${p.image}" alt="${p.label}" class="icon-img">`
+    ? `<img src="${esc(p.image)}" alt="${esc(p.label)}" class="icon-img">`
     : "";
-  btn.innerHTML = `${img}<span>${p.label}</span>`;
+  btn.innerHTML = `${img}<span>${esc(p.label)}</span>`;
   btn.onclick = () => {
     sentence.push(p);
     renderSentence();
@@ -143,9 +147,9 @@ function renderSentence() {
     const span = document.createElement("span");
     span.className = "word-token";
     const imgHtml = word.image
-      ? `<img src="${word.image}" alt="${word.label}" class="token-img">`
+      ? `<img src="${esc(word.image)}" alt="${esc(word.label)}" class="token-img">`
       : "";
-    span.innerHTML = `${imgHtml}<span class="token-text">${word.label}</span>`;
+    span.innerHTML = `${imgHtml}<span class="token-text">${esc(word.label)}</span>`;
     wordsEl.appendChild(span);
   });
 }
@@ -223,18 +227,18 @@ function renderCustomList() {
     item.className = "custom-item";
 
     const imgHtml = p.image
-      ? `<img src="${p.image}" alt="${p.label}" class="custom-item-img">`
+      ? `<img src="${esc(p.image)}" alt="${esc(p.label)}" class="custom-item-img">`
       : "";
 
     item.innerHTML = `
       <div class="custom-item-info">
         ${imgHtml}
         <div class="custom-item-text">
-          <span class="custom-item-label">${p.label}</span>
-          <span class="custom-item-category">${p.category}</span>
+          <span class="custom-item-label">${esc(p.label)}</span>
+          <span class="custom-item-category">${esc(p.category)}</span>
         </div>
       </div>
-      <button class="delete-btn" data-id="${p.id}">Elimina</button>
+      <button class="delete-btn">Elimina</button>
     `;
 
     item.querySelector(".delete-btn").onclick = () => {
@@ -254,7 +258,7 @@ manageModal.onclick = (e) => {
   if (e.target === manageModal) closeManageModal();
 };
 
-loadData().then(() => { 
-  rerender(); 
+loadData().then(() => {
+  rerender();
   renderSentence();
- });
+});
