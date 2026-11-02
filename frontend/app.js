@@ -54,13 +54,22 @@ function deleteCustomPictogram(id) {
   saveCustomPictograms(filtered);
 }
 
+function refreshPictograms() {
+  PICTOGRAMS = [...BASE_PICTOGRAMS, ...getCustomPictograms()];
+  CATEGORIES = [...new Set(PICTOGRAMS.map(p => p.category))];
+  if (!CATEGORIES.includes(currentCategory)) currentCategory = CATEGORIES[0];
+}
+
 async function loadData() {
   const res = await fetch("./pictograms.json");
   BASE_PICTOGRAMS = await res.json();
-  const custom = getCustomPictograms();
-  PICTOGRAMS = [...BASE_PICTOGRAMS, ...custom];
-  CATEGORIES = [...new Set(PICTOGRAMS.map(p => p.category))];
-  currentCategory = CATEGORIES[0];
+  refreshPictograms();
+}
+
+function rerender() {
+  renderTabs();
+  renderCoreRow();
+  renderGrid();
 }
 
 function speak(text) {
@@ -175,12 +184,8 @@ customForm.onsubmit = (e) => {
   addCustomPictogram(label, category, imageUrl);
   closeCustomModal();
 
-  // Reload data to include new custom pictogram
-  loadData().then(() => {
-    renderTabs();
-    renderCoreRow();
-    renderGrid();
-  });
+  refreshPictograms();
+  rerender();
 };
 
 // Close modal on backdrop click
@@ -236,12 +241,8 @@ function renderCustomList() {
       if (confirm(`Eliminare "${p.label}"?`)) {
         deleteCustomPictogram(p.id);
         renderCustomList();
-        // Reload data to reflect deletion
-        loadData().then(() => {
-          renderTabs();
-          renderCoreRow();
-          renderGrid();
-        });
+        refreshPictograms();
+        rerender();
       }
     };
 
@@ -253,9 +254,7 @@ manageModal.onclick = (e) => {
   if (e.target === manageModal) closeManageModal();
 };
 
-loadData().then(() => {
-  renderTabs();
-  renderCoreRow();
-  renderGrid();
+loadData().then(() => { 
+  rerender(); 
   renderSentence();
-});
+ });
