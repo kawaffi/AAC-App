@@ -85,9 +85,27 @@ body {
   border-bottom: 2px solid var(--color-border);
 }
 
+/* Allow header to wrap on tablet/iPad */
+@media (max-width: 1024px) {
+  #header-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #sentence-bar {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  #custom-actions {
+    order: 10;
+  }
+}
+
 /* Custom action buttons (add/manage) */
 #custom-actions {
   display: flex;
+  flex-direction: column;
   gap: var(--spacing-sm);
   flex-shrink: 0;
 }
@@ -110,8 +128,8 @@ body {
 }
 
 .action-btn {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   background: var(--color-action);
 }
 
