@@ -36,7 +36,7 @@ function saveCustomPictograms(custom) {
   }
 }
 
-function addCustomPictogram(label, category, imageUrl = null) {
+function addCustomPictogram(label, category, image = null) {
   const custom = getCustomPictograms();
   const newPicto = {
     label: label,
@@ -45,7 +45,7 @@ function addCustomPictogram(label, category, imageUrl = null) {
     core: false,
     custom: true,
     id: `custom-${Date.now()}`,
-    image: imageUrl
+    image: image
   };
   custom.push(newPicto);
   saveCustomPictograms(custom);
@@ -56,6 +56,30 @@ function deleteCustomPictogram(id) {
   const custom = getCustomPictograms();
   const filtered = custom.filter(p => p.id !== id);
   saveCustomPictograms(filtered);
+}
+
+function fileToDataUrl(file, maxSize = 256) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL("image/jpeg", 0.85));
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("Immagine non leggibile"));
+    };
+    img.src = url;
+  });
 }
 
 function refreshPictograms() {
@@ -177,17 +201,25 @@ function closeCustomModal() {
 document.getElementById("close-modal").onclick = closeCustomModal;
 document.getElementById("cancel-custom").onclick = closeCustomModal;
 
-customForm.onsubmit = (e) => {
+customForm.onsubmit = async (e) => {
   e.preventDefault();
   const label = document.getElementById("custom-label").value.trim();
-  const category = document.getElementById("custom-category").value;
-  const imageUrl = document.getElementById("custom-image").value.trim() || null;
-
   if (!label) return;
+  const category = document.getElementById("custom-category").value;
+  const file = document.getElementById("custom-image-file").files[0];
 
-  addCustomPictogram(label, category, imageUrl);
+  let image = null;
+  if (file) {
+    try {
+      image = await fileToDataUrl(file);
+    } catch {
+      alert("Impossibile leggere l'immagine.");
+      return;
+    }
+  }
+
+  addCustomPictogram(label, category, image);
   closeCustomModal();
-
   refreshPictograms();
   rerender();
 };
