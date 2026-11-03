@@ -8,7 +8,8 @@ const CATEGORY_ICONS = {
   "Sentimenti": "😊",
   "Bisogni": "🚨",
   "Azioni": "🏃",
-  "Persone": "👥"
+  "Persone": "👥",
+  "Luoghi": "🏠"
 };
 
 const CUSTOM_STORAGE_KEY = "aac-custom-pictograms";
