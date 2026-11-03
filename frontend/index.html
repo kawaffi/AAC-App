@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Comunica">
@@ -83,6 +84,9 @@
       </div>
       <div id="custom-list"></div>
       <div class="form-actions">
+        <button type="button" id="export-custom" class="btn-secondary">Esporta</button>
+        <button type="button" id="import-custom" class="btn-secondary">Importa</button>
+        <input type="file" id="import-file" accept=".json,application/json" hidden>
         <button type="button" id="close-manage-btn" class="btn-secondary">Chiudi</button>
       </div>
     </div>

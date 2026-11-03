@@ -30,9 +30,11 @@ function getCustomPictograms() {
 function saveCustomPictograms(custom) {
   try {
     localStorage.setItem(CUSTOM_STORAGE_KEY, JSON.stringify(custom));
+    return true;
   } catch (e) {
     console.error("Error saving custom pictograms:", e);
     alert("Impossibile salvare i pittogrammi personalizzati. Spazio insufficiente?");
+    return false;
   }
 }
 
@@ -48,8 +50,7 @@ function addCustomPictogram(label, category, image = null) {
     image: image
   };
   custom.push(newPicto);
-  saveCustomPictograms(custom);
-  return newPicto;
+  return saveCustomPictograms(custom) ? newPicto : null;
 }
 
 function deleteCustomPictogram(id) {
@@ -218,7 +219,7 @@ customForm.onsubmit = async (e) => {
     }
   }
 
-  addCustomPictogram(label, category, image);
+  if (!addCustomPictogram(label, category, image)) return;
   closeCustomModal();
   refreshPictograms();
   rerender();
@@ -243,6 +244,83 @@ function closeManageModal() {
 
 document.getElementById("close-manage-modal").onclick = closeManageModal;
 document.getElementById("close-manage-btn").onclick = closeManageModal;
+
+const exportBtn = document.getElementById("export-custom");
+exportBtn.addEventListener("click", async () => {
+  const custom = getCustomPictograms();
+  if (custom.length === 0) {
+    alert("Nessun pittogramma personalizzato da esportare.");
+    return;
+  }
+
+  const data = JSON.stringify(custom, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "pittogrammi-personalizzati.json";
+  a.style.display = "none";
+  document.body.appendChild(a);
+  a.click();
+
+  setTimeout(() => {
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, 100);
+});
+
+const importInput = document.getElementById("import-file");
+const importBtn = document.getElementById("import-custom");
+importBtn.addEventListener("click", () => {
+  importInput.click();
+});
+
+importInput.onchange = async () => {
+  const file = importInput.files[0];
+  if (!file) return;
+
+  try {
+    const imported = JSON.parse(await file.text());
+    if (!Array.isArray(imported)) throw new Error("formato");
+
+    const existing = getCustomPictograms();
+    const ids = new Set(existing.map(p => p.id));
+    const valid = [];
+
+    for (const p of imported) {
+      if (!p || typeof p.id !== "string" || !p.label || !p.category) continue;
+      if (ids.has(p.id)) continue;
+      if (p.image != null && !String(p.image).startsWith("data:image/")) continue;
+      ids.add(p.id);
+      valid.push({
+        id: p.id,
+        label: String(p.label),
+        search: String(p.label).toLowerCase(),
+        category: String(p.category),
+        core: false,
+        custom: true,
+        image: p.image ?? null
+      });
+    }
+
+    if (valid.length === 0) {
+      alert("Nessun nuovo pittogramma da importare.");
+      return;
+    }
+    if (!saveCustomPictograms([...existing, ...valid])) return;
+
+    refreshPictograms();
+    rerender();
+    renderCustomList();
+    const skipped = imported.length - valid.length;
+    alert(`Importati ${valid.length} pittogrammi.` + (skipped ? ` Scartati: ${skipped}.` : ""));
+  } catch {
+    alert("File non valido.");
+  } finally {
+    importInput.value = "";
+  }
+};
 
 function renderCustomList() {
   const listEl = document.getElementById("custom-list");
