@@ -166,5 +166,21 @@
     "core": false,
     "id": 6625,
     "image": "assets/pictograms/6625.png"
+  },
+  {
+    "label": "Voi",
+    "search": "vosotros",
+    "category": "Persone",
+    "core": false,
+    "id": 7304,
+    "image": "assets/pictograms/7304.png"
+  },
+  {
+    "label": "Noi",
+    "search": "nosotros",
+    "category": "Persone",
+    "core": false,
+    "id": 7183,
+    "image": "assets/pictograms/7183.png"
   }
 ]
