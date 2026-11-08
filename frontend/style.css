@@ -52,6 +52,10 @@
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
 }
 
 button:focus-visible {
@@ -71,6 +75,8 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
 }
 
 /* ========================================
@@ -161,7 +167,7 @@ body {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  overflow-x: auto;
+  overflow: hidden;
   white-space: nowrap;
 }
 
@@ -228,7 +234,7 @@ body {
   padding: var(--spacing-md) 14px;
   background: var(--color-bg-tabs);
   border-bottom: 2px solid var(--color-border);
-  overflow-x: auto;
+  overflow: hidden;
   white-space: nowrap;
 }
 

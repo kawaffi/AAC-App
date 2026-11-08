@@ -3,6 +3,8 @@ let PICTOGRAMS = [];
 let BASE_PICTOGRAMS = [];
 let currentCategory = "";
 let sentence = [];
+let sentenceTimer = null;
+const SENTENCE_CLEAR_DELAY = 45000; // 45 seconds
 
 const CATEGORY_ICONS = {
   "Sentimenti": "😊",
@@ -162,11 +164,27 @@ function makeButton(p, extraClass = "") {
   return btn;
 }
 
+function resetSentenceTimer() {
+  if (sentenceTimer) {
+    clearTimeout(sentenceTimer);
+  }
+  if (sentence.length > 0) {
+    sentenceTimer = setTimeout(() => {
+      sentence = [];
+      renderSentence();
+    }, SENTENCE_CLEAR_DELAY);
+  }
+}
+
 function renderSentence() {
   const wordsEl = document.getElementById("sentence-words");
   wordsEl.innerHTML = "";
   if (sentence.length === 0) {
     wordsEl.innerHTML = `<span id="placeholder">Tocca un simbolo per iniziare</span>`;
+    if (sentenceTimer) {
+      clearTimeout(sentenceTimer);
+      sentenceTimer = null;
+    }
     return;
   }
   sentence.forEach(word => {
@@ -178,9 +196,17 @@ function renderSentence() {
     span.innerHTML = `${imgHtml}<span class="token-text">${esc(word.label)}</span>`;
     wordsEl.appendChild(span);
   });
+  resetSentenceTimer();
 }
 
-document.getElementById("clear-btn").onclick = () => { sentence = []; renderSentence(); };
+document.getElementById("clear-btn").onclick = () => {
+  if (sentenceTimer) {
+    clearTimeout(sentenceTimer);
+    sentenceTimer = null;
+  }
+  sentence = [];
+  renderSentence();
+};
 document.getElementById("speak-btn").onclick = () => speak(sentence.map(w => w.label).join(" "));
 
 document.getElementById("add-custom-btn").onclick = openCustomModal;
