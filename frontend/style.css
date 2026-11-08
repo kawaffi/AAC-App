@@ -76,7 +76,6 @@ body {
   flex-direction: column;
   overflow: hidden;
   overscroll-behavior: none;
-  touch-action: none;
 }
 
 /* ========================================
@@ -167,8 +166,11 @@ body {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
 }
 
 .word-token {
@@ -234,8 +236,11 @@ body {
   padding: var(--spacing-md) 14px;
   background: var(--color-bg-tabs);
   border-bottom: 2px solid var(--color-border);
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
 }
 
 .tab {

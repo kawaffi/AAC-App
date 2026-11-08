@@ -151,7 +151,7 @@ function renderGrid() {
 
 function makeButton(p, extraClass = "") {
   const btn = document.createElement("button");
-  btn.className = "pictogram-btn " + extraClass;
+  btn.className = "pictogram-btn " + extraClass + (p.image ? "" : " no-image");
   const img = p.image
     ? `<img src="${esc(p.image)}" alt="${esc(p.label)}" class="icon-img">`
     : "";
@@ -189,7 +189,7 @@ function renderSentence() {
   }
   sentence.forEach(word => {
     const span = document.createElement("span");
-    span.className = "word-token";
+    span.className = "word-token" + (word.image ? "" : " no-image");
     const imgHtml = word.image
       ? `<img src="${esc(word.image)}" alt="${esc(word.label)}" class="token-img">`
       : "";
